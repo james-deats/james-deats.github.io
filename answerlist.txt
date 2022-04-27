@@ -19,3 +19,6 @@ youth
 river
 shoot
 train
+sting
+braid
+miner
