@@ -1,30 +1,30 @@
-var kb_padding = 0.9;
-var kb_spacing = 1.25;
+let kb_padding = 0.9;
+let kb_spacing = 1.25;
 
-var box_spacing = 1.25;
+let box_spacing = 1.25;
 
-var word_len = 5;
-var num_guess = 6;
+let word_len = 5;
+let num_guess = 6;
 
-var title_space = 0.1;
-var title_elements = 2;
+let title_space = 0.1;
+let title_elements = 2;
 
-var kb = [];
-var guesses = [];
-var curr_guess = 0;
-var curr_letter = 0;
-var score = 0;
+let kb = [];
+let guesses = [];
+let curr_guess = 0;
+let curr_letter = 0;
+let score = 0;
 
-var gameWon = false;
+let gameWon = false;
 
-var guessColor = ["#000000", "#2c3032", "#917f2f", "#42713e"];
-var kbColor = ["#5e666a", "#2c3032", "#917f2f", "#42713e"];
-var bgColor = "#0e0f10";
+let guessColor = ["#000000", "#2c3032", "#917f2f", "#42713e"];
+let kbColor = ["#5e666a", "#2c3032", "#917f2f", "#42713e"];
+let bgColor = "#0e0f10";
 
-var wordList = [];
-var answerList = [];
+let wordList = [];
+let answerList = [];
 
-var answer = "";
+let answer = "";
 
 function preload() {
   wordList = loadStrings('wordlist.txt');
@@ -32,11 +32,11 @@ function preload() {
 }
 
 function setup() {
-  var cnv = null;
+  let cnv = null;
   if (windowWidth > windowHeight) {
     cnv = createCanvas(windowHeight * 0.5, windowHeight);
-    var x = (windowWidth - width) / 2;
-    var y = (windowHeight - height) / 2;
+    let x = (windowWidth - width) / 2;
+    let y = (windowHeight - height) / 2;
     cnv.position(x, y);
   } else {
     cnv = createCanvas(windowWidth, windowHeight);
@@ -49,16 +49,16 @@ function setup() {
 
   answer = answerList[floor(random(answerList.length))];
 
-  var top = "QWERTYUIOP";
-  var mid = "ASDFGHJKL";
-  var btm = "ZXCVBNM";
+  let top = "QWERTYUIOP";
+  let mid = "ASDFGHJKL";
+  let btm = "ZXCVBNM";
 
-  var keyboard_x = (kb_padding * width) / (top.length * kb_spacing);
-  var keyboard_y = keyboard_x * 1.5;
+  let keyboard_x = (kb_padding * width) / (top.length * kb_spacing);
+  let keyboard_y = keyboard_x * 1.5;
 
-  var x0_top =
+  let x0_top =
     (width - (keyboard_x * kb_spacing * (top.length - 1) + keyboard_x)) / 2;
-  for (var i = 0; i < top.length; i++) {
+  for (let i = 0; i < top.length; i++) {
     kb.push(
       new Button(
         x0_top + kb_spacing * keyboard_x * i,
@@ -70,9 +70,9 @@ function setup() {
     );
   }
 
-  var x0_mid =
+  let x0_mid =
     (width - (keyboard_x * kb_spacing * (mid.length - 1) + keyboard_x)) / 2;
-  for (var i = 0; i < mid.length; i++) {
+  for (let i = 0; i < mid.length; i++) {
     kb.push(
       new Button(
         x0_mid + kb_spacing * keyboard_x * i,
@@ -84,9 +84,9 @@ function setup() {
     );
   }
 
-  var x0_btm =
+  let x0_btm =
     (width - (keyboard_x * kb_spacing * (btm.length - 1) + keyboard_x)) / 2;
-  for (var i = 0; i < btm.length; i++) {
+  for (let i = 0; i < btm.length; i++) {
     kb.push(
       new Button(
         x0_btm + kb_spacing * keyboard_x * i,
@@ -119,24 +119,24 @@ function setup() {
     )
   );
 
-  var game_h =
+  let game_h =
     height -
     4 * kb_spacing * keyboard_y -
     height * title_space * title_elements;
-  var game_w =
+  let game_w =
     (keyboard_x * kb_spacing * (top.length - 1) + keyboard_x) / box_spacing;
-  var box_size = min(game_w, game_h) / (word_len * box_spacing);
+  let box_size = min(game_w, game_h) / (word_len * box_spacing);
 
-  var game_x =
+  let game_x =
     width / 2 - ((word_len - 1) * box_size * box_spacing) / 2 - box_size / 2;
-  var game_y =
+  let game_y =
     game_h / 2 -
     ((word_len - 1) * box_size * box_spacing) / 2 -
     box_size / 2 +
     (height * title_space) / title_elements;
   game_y = (height * title_space * title_elements) / 2 + box_size;
 
-  for (var i = 0; i < num_guess; i++) {
+  for (let i = 0; i < num_guess; i++) {
     guesses.push(
       new Guess(game_x, game_y + i * box_size * box_spacing, box_size)
     );
@@ -160,11 +160,11 @@ function draw() {
     textSize(height * title_space * 0.25);
     text("Score: " + score, width / 2, (2 * title_space * height) / 2);
 
-    for (var i = 0; i < kb.length; i++) {
+    for (let i = 0; i < kb.length; i++) {
       kb[i].render();
     }
 
-    for (var i = 0; i < guesses.length; i++) {
+    for (let i = 0; i < guesses.length; i++) {
       guesses[i].render();
     }
   }
@@ -210,7 +210,7 @@ function resetGame(won) {
 }
 
 function touchEnded() {
-  for (var i = 0; i < kb.length; i++) {
+  for (let i = 0; i < kb.length; i++) {
     if (kb[i].isClicked(mouseX, mouseY)) {
       updateGuess(kb[i].ToString());
       break;
@@ -232,8 +232,8 @@ function keyPressed() {
 }
 
 function updateKbColor(word, color) {
-  for (var i = 0; i < word.length; i++) {
-    for (var j = 0; j < kb.length; j++) {
+  for (let i = 0; i < word.length; i++) {
+    for (let j = 0; j < kb.length; j++) {
       if (kb[j].ToString().toUpperCase() == word[i]) {
         if (kb[j].getColor() < color[i]) {
           kb[j].setColor(color[i]);
@@ -299,13 +299,13 @@ class Guess {
     this.length = word_len;
     this.guess = [];
     this.color = [];
-    for (var i = 0; i < word_len; i++) {
+    for (let i = 0; i < word_len; i++) {
       this.color.push(0);
     }
   }
 
   render() {
-    for (var i = 0; i < word_len; i++) {
+    for (let i = 0; i < word_len; i++) {
       fill(guessColor[this.color[i]]);
       stroke("gray");
       strokeWeight(2);
@@ -343,20 +343,19 @@ class Guess {
   }
 
   updateColor(a) {
-    var original_value = a.toUpperCase();
-    var guessed_value = original_value.split("");
-    var newColor = [];
-    for (var i = 0; i < this.guess.length; i++) {
-      newColor[i] = 1;
-      if (guessed_value.includes(this.guess[i])) {
-        newColor[i] = 2;
-        guessed_value[guessed_value.indexOf(this.guess[i])] = " ";
-      }
-      this.color[i] = newColor;
-    }
-    for (var i = 0; i < this.guess.length; i++) {
-      if (this.guess[i] == original_value[i]) {
+    let original_value = a.toUpperCase();
+    let guessed_value = original_value.split("");
+    let newColor = new Array(word_len).fill(1);
+    for (let i = 0; i < this.guess.length; i++) {
+      if (original_value[i] ==  this.guess[i]) {
         newColor[i] = 3;
+        guessed_value[i] = ' ';
+      }
+    }
+    for (let i = 0; i < this.guess.length; i++) {
+      if (guessed_value.includes(this.guess[i]) && newColor[i] < 3) {
+        newColor[i] = 2;
+        guessed_value[i] = ' ';
       }
     }
     this.color = newColor;
