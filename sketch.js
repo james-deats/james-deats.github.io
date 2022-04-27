@@ -363,7 +363,7 @@ class Guess {
       }
     }
     for (let i = 0; i < this.guess.length; i++) {
-      if (guessed_value.includes(this.guess[i])) {
+      if (guessed_value.includes(this.guess[i]) && newColor[i] != 3) {
         newColor[i] = 2;
         guessed_value[guessed_value.indexOf(this.guess[i])] = ' ';
       }
