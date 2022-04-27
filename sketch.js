@@ -32,6 +32,7 @@ function preload() {
 }
 
 function setup() {
+  answerList = answerList.filter(x => {return x.length == word_len});
   let cnv = null;
   if (windowWidth > windowHeight) {
     cnv = createCanvas(windowHeight * 0.5, windowHeight);
@@ -48,7 +49,7 @@ function setup() {
   curr_letter = 0;
 
   answer = answerList[floor(random(answerList.length))];
-
+  
   let top = "QWERTYUIOP";
   let mid = "ASDFGHJKL";
   let btm = "ZXCVBNM";
