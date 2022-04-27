@@ -357,15 +357,15 @@ class Guess {
     let guessed_value = original_value.split("");
     let newColor = new Array(word_len).fill(1);
     for (let i = 0; i < this.guess.length; i++) {
-      if (original_value[i] ==  this.guess[i]) {
+      if (original_value[i] == this.guess[i]) {
         newColor[i] = 3;
         guessed_value[i] = ' ';
       }
     }
     for (let i = 0; i < this.guess.length; i++) {
-      if (guessed_value.includes(this.guess[i]) && newColor[i] < 3) {
+      if (guessed_value.includes(this.guess[i])) {
         newColor[i] = 2;
-        guessed_value[i] = ' ';
+        guessed_value[guessed_value.indexOf(this.guess[i])] = ' ';
       }
     }
     this.color = newColor;
