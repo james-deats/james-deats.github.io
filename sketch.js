@@ -157,8 +157,7 @@ function draw() {
     textSize(height * title_space * 0.5);
     fill("white");
     text("Hungle Games", width / 2, (title_space * height) / 2);
-    textSize(height * title_space * 0.25);
-    text("Score: " + score, width / 2, (2 * title_space * height) / 2);
+    
 
     for (let i = 0; i < kb.length; i++) {
       kb[i].render();
@@ -167,6 +166,17 @@ function draw() {
     for (let i = 0; i < guesses.length; i++) {
       guesses[i].render();
     }
+    
+    fill('white');
+    if (curr_guess == num_guess) {
+      textSize(height * title_space * 0.3);
+      text("Word: " + answer, width / 2, (2 * title_space * height) / 2);
+    }
+    else {
+      textSize(height * title_space * 0.25);
+      text("Score: " + score, width / 2, (2 * title_space * height) / 2);
+    }
+    
   }
 }
 
@@ -205,7 +215,7 @@ function resetGame(won) {
     gameWon = true;
   } else {
     answerList.splice(answerList.indexOf(answer), 1);
-    setTimeout(setup, 1000);
+    setTimeout(setup, 1000);    
   }
 }
 
